@@ -1,0 +1,73 @@
+/**
+ * Clase para probar el funcionamiento del código
+ * @author Jhonatan David Vivas Arango, 
+ * @since 2024-02
+ * 
+ * Licencia GNU/GPL V3.0 (https://raw.githubusercontent.com/grid-uq/poo/main/LICENSE) 
+ */
+package co.edu.uniquindio.poo;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.logging.Logger;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest {
+    private static final Logger LOG = Logger.getLogger(AppTest.class.getName());
+
+    public void shouldAnswerWithTrue() {
+        LOG.info("Iniciado test shouldAnswerWithTrue");
+        assertTrue(true);
+        LOG.info("Finalizando test shouldAnswerWithTrue");
+    }
+
+    /**
+     * Rigorous Test :-)
+     */
+    @Test
+    public void completeInformation(){
+        LOG.info("Iniciating test for complete information");
+        Pets pet = new Pets("Manchas", "Dog", "Criollo", (byte)1, "Macho", "Blanco y Negro", 1.2);
+        assertEquals(pet.name(), "Manchas");
+        assertEquals(pet.species(), "Dog");
+        assertEquals(pet.breed(), "Criollo");
+        assertEquals(pet.age(), (byte)1);
+        assertEquals(pet.gender(), "Macho");
+        assertEquals(pet.color(), "Blanco y Negro");
+        assertEquals(pet.weight(), 1.2);
+        LOG.info("Finishing test for complete information");
+    }
+
+    @Test
+    public void nullData(){
+        LOG.info("Iniciating test for null data");
+        assertThrows(Throwable.class, () -> new Pets(null, null, null, (byte)0, null, null, 0));
+        LOG.info("Finishing test for null data");
+    }
+
+    @Test
+    public void blankInformation(){
+        LOG.info("Iniciating test for blank information");
+        assertThrows(Throwable.class, () -> new Pets("", "", "", (byte)0, "", "", 0));
+        LOG.info("Finishing test for blank information");
+    }
+
+    @Test
+    public void negativeAge(){
+        LOG.info("Iniciating test for negative age");
+        assertThrows(Throwable.class, () -> new Pets("Manchas", "Dog", "Criollo", (byte)-1, "Macho", "Blanco y Negro", 3.4));
+        LOG.info("Finishing test for negative age");
+    }
+
+    @Test
+    public void negativeWeight(){
+        LOG.info("Iniciating test for negative weight");
+        assertThrows(Throwable.class, () -> new Pets("Manchas", "Dog", "Criollo", (byte)1, "Macho", "Blanco y Negro", -3.4));
+        LOG.info("Finishing test for negative weight");
+    }
+}
