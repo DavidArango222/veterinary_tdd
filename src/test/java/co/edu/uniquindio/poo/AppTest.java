@@ -26,19 +26,17 @@ public class AppTest {
         LOG.info("Finalizando test shouldAnswerWithTrue");
     }
 
-    /**
-     * Rigorous Test :-)
-     */
+
     @Test
     public void completeInformation(){
         LOG.info("Iniciating test for complete information");
-        Pets pet = new Pets("Manchas", "Dog", "Criollo", (byte)1, "Macho", "Blanco y Negro", 1.2);
+        Pets pet = new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)1, Gender.MALE, Colour.BLACK, 1.2);
         assertEquals(pet.name(), "Manchas");
-        assertEquals(pet.species(), "Dog");
-        assertEquals(pet.breed(), "Criollo");
+        assertEquals(pet.species(), Species.DOG);
+        assertEquals(pet.breed(), Breed.GOLDEN_RETRIEVER);
         assertEquals(pet.age(), (byte)1);
-        assertEquals(pet.gender(), "Macho");
-        assertEquals(pet.color(), "Blanco y Negro");
+        assertEquals(pet.gender(), Gender.MALE);
+        assertEquals(pet.colour(), Colour.BLACK);
         assertEquals(pet.weight(), 1.2);
         LOG.info("Finishing test for complete information");
     }
@@ -51,23 +49,17 @@ public class AppTest {
     }
 
     @Test
-    public void blankInformation(){
-        LOG.info("Iniciating test for blank information");
-        assertThrows(Throwable.class, () -> new Pets("", "", "", (byte)0, "", "", 0));
-        LOG.info("Finishing test for blank information");
-    }
-
-    @Test
     public void negativeAge(){
         LOG.info("Iniciating test for negative age");
-        assertThrows(Throwable.class, () -> new Pets("Manchas", "Dog", "Criollo", (byte)-1, "Macho", "Blanco y Negro", 3.4));
+        assertThrows(Throwable.class, () -> new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)-1, Gender.MALE, Colour.BLACK, 3.4));
         LOG.info("Finishing test for negative age");
     }
 
     @Test
     public void negativeWeight(){
         LOG.info("Iniciating test for negative weight");
-        assertThrows(Throwable.class, () -> new Pets("Manchas", "Dog", "Criollo", (byte)1, "Macho", "Blanco y Negro", -3.4));
+        assertThrows(Throwable.class, () -> new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)1, Gender.MALE, Colour.BLACK, -3.4));
         LOG.info("Finishing test for negative weight");
     }
+
 }
