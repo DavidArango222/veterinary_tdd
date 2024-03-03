@@ -1,6 +1,6 @@
 /**
  * Clase para probar el funcionamiento del código
- * @author Jhonatan David Vivas Arango, 
+ * @author Jhonatan David Vivas Arango, Valery Andrea Ortiz Mesa, Nicol Dayana Marín Moreno
  * @since 2024-02
  * 
  * Licencia GNU/GPL V3.0 (https://raw.githubusercontent.com/grid-uq/poo/main/LICENSE) 
