@@ -4,8 +4,9 @@ Descripciín basisca de su Proyecto de POO ...
 
 # Autores
 
-- Autor 1
-- Autor 2
+- Jhonatan David Vivas Arango
+- Valery Andrea Ortiz Mesa
+- Nicol Dayana Marín Moreno
 
 # Herramientas
 
