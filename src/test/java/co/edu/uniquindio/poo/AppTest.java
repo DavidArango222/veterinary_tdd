@@ -62,4 +62,11 @@ public class AppTest {
         LOG.info("Finishing test for negative weight");
     }
 
+    @Test
+    public void blankInformation(){
+        LOG.info("Iniciating test for blank information");
+        assertThrows(Throwable.class, () -> new Pets("", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)1, Gender.MALE, Colour.BLACK, -3.4));
+        LOG.info("Finishing test for blank information");
+    }
+
 }
