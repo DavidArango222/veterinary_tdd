@@ -9,8 +9,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.sql.rowset.spi.SyncProviderException;
-
 import org.junit.jupiter.api.Test;
 
 /**
@@ -32,7 +30,7 @@ public class VeterinaryTest {
     public void completeInformation() {
         LOG.info("Iniciating test for complete information");
         Veterinary veterinary = new Veterinary("Huellitas");
-        assertEquals("Programación I", veterinary.getNombre());
+        assertEquals("Huellitas", veterinary.getName());
         LOG.info("Finishing test for complete information");
     }
 
@@ -44,7 +42,8 @@ public class VeterinaryTest {
         LOG.info("Iniciating test add pet");
         Veterinary veterinary = new Veterinary("Huellitas");
         Pets pet = new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 2, Gender.MALE, Colour.BLACK, 1.2, "1124312515");
-        Veterinary.petAdd(pet);
+
+        veterinary.petAdd(pet);
 
         assertTrue(Veterinary.getPets().contains(pet));
         assertEquals(1, Veterinary.getPets().size());
@@ -73,8 +72,8 @@ public class VeterinaryTest {
         Pets pet1 = new Pets("Francisco", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 3, Gender.MALE, Colour.BLACK, 1.2, "1124312515");
         Pets pet2 = new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 6, Gender.MALE, Colour.BLACK, 1.6, "1124312515");
 
-        veterinary.agregarEstudiante(pet1);
-        assertThrows(Throwable.class, () -> veterinary.agregarEstudiante(pet2));
+        veterinary.petAdd(pet1);
+        assertThrows(Throwable.class, () -> veterinary.petAdd(pet2));
 
         LOG.info("Finishing test for pet add repeat");
     }
@@ -93,10 +92,10 @@ public class VeterinaryTest {
         Pets tobby = new Pets("Tobby", Species.DOG, Breed.GERMAN_SHEPHERD, (byte) 7, Gender.MALE, Colour.WHITE, 1.7, "1124312517");
         Pets vartolo = new Pets("Vartolo", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 2, Gender.MALE, Colour.BLACK, 1.5, "1124312518");
 
-        curso.agregarEstudiante(francisco);
-        curso.agregarEstudiante(manchas);
-        curso.agregarEstudiante(tobby);
-        curso.agregarEstudiante(vartolo);
+        veterinary.petAdd(francisco);
+        veterinary.petAdd(manchas);
+        veterinary.petAdd(tobby);
+        veterinary.petAdd(vartolo);
 
         Collection<Pets> waitList = List.of(francisco, manchas, tobby, vartolo);
 
@@ -109,7 +108,7 @@ public class VeterinaryTest {
      * Test to verify to obtain a list by age in descending order
      */
     @Test
-    public void obtenerListadoEdadDescente() {
+    public void getDescendingAgeList() {
         LOG.info("Inicio obtenerListadoEdadDescente");
 
         Veterinary veterinary = new Veterinary("Huellitas");
@@ -120,14 +119,14 @@ public class VeterinaryTest {
         Pets vartolo = new Pets("Vartolo", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 2, Gender.MALE, Colour.BLACK, 1.5, "1124312518");
 
 
-        curso.agregarEstudiante(francisco);
-        curso.agregarEstudiante(manchas);
-        curso.agregarEstudiante(tobby);
-        curso.agregarEstudiante(vartolo);
+        veterinary.petAdd(francisco);
+        veterinary.petAdd(manchas);
+        veterinary.petAdd(tobby);
+        veterinary.petAdd(vartolo);
 
         var waitList = List.of(tobby, manchas, francisco, vartolo);
 
-        assertIterableEquals(waitList, veterinary.obtainDescendingAgeList());
+        assertIterableEquals(waitList, veterinary.getDescendingAgeList());
 
         LOG.info("Finishing test for obtain Descending Age List");
     }
@@ -136,25 +135,25 @@ public class VeterinaryTest {
      * Test to verify obtaining a list of minors
      */
     @Test
-    public void obtainUnderageList() {
+    public void getAdultList() {
         LOG.info("Inicio obtenerListadoMenoresEdad");
 
-        Veterinary veterinary = new Veterinary("Huellitas");
+        var veterinary = new Veterinary("Huellitas");
 
-        Pets francisco = new Pets("Francisco", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 3, Gender.MALE, Colour.BLACK, 1.2, "1124312515");
-        Pets manchas = new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 6, Gender.MALE, Colour.BLACK, 1.6, "1124312516");
-        Pets tobby = new Pets("Tobby", Species.DOG, Breed.GERMAN_SHEPHERD, (byte) 7, Gender.MALE, Colour.WHITE, 1.7, "1124312517");
-        Pets vartolo = new Pets("Vartolo", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 2, Gender.MALE, Colour.BLACK, 1.5, "1124312518");
+        var francisco = new Pets("Francisco", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 3, Gender.MALE, Colour.BLACK, 1.2, "1124312515");
+        var manchas = new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 6, Gender.MALE, Colour.BLACK, 1.6, "1124312516");
+        var tobby = new Pets("Tobby", Species.DOG, Breed.GERMAN_SHEPHERD, (byte) 7, Gender.MALE, Colour.WHITE, 1.7, "1124312517");
+        var vartolo = new Pets("Vartolo", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte) 2, Gender.MALE, Colour.BLACK, 1.5, "1124312518");
 
 
-        curso.agregarEstudiante(francisco);
-        curso.agregarEstudiante(manchas);
-        curso.agregarEstudiante(tobby);
-        curso.agregarEstudiante(vartolo);
+        veterinary.petAdd(francisco);
+        veterinary.petAdd(manchas);
+        veterinary.petAdd(tobby);
+        veterinary.petAdd(vartolo);
 
-        Collection<Pets> waitList = List.of(francisco, vartolo);
+        Collection<Pets> waitList = List.of(manchas, tobby);
 
-        assertIterableEquals(waitList, veterinary.obtainUnderageList());
+        assertIterableEquals(waitList, veterinary.getAdultList());
 
         LOG.info("Finishing test for obtain Underage List");
     }
