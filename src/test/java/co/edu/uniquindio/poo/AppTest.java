@@ -30,7 +30,7 @@ public class AppTest {
     @Test
     public void completeInformation(){
         LOG.info("Iniciating test for complete information");
-        Pets pet = new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)1, Gender.MALE, Colour.BLACK, 1.2);
+        Pets pet = new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)1, Gender.MALE, Colour.BLACK, 1.2, "1124312515");
         assertEquals(pet.name(), "Manchas");
         assertEquals(pet.species(), Species.DOG);
         assertEquals(pet.breed(), Breed.GOLDEN_RETRIEVER);
@@ -38,35 +38,39 @@ public class AppTest {
         assertEquals(pet.gender(), Gender.MALE);
         assertEquals(pet.colour(), Colour.BLACK);
         assertEquals(pet.weight(), 1.2);
+        assertEquals(pet.dniCode(), "1124312515");
         LOG.info("Finishing test for complete information");
     }
 
     @Test
     public void nullData(){
         LOG.info("Iniciating test for null data");
-        assertThrows(Throwable.class, () -> new Pets(null, null, null, (byte)0, null, null, 0));
+        assertThrows(Throwable.class, () -> new Pets(null, null, null, (byte)0, null, null, 0, ""));
         LOG.info("Finishing test for null data");
     }
 
     @Test
     public void negativeAge(){
         LOG.info("Iniciating test for negative age");
-        assertThrows(Throwable.class, () -> new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)-1, Gender.MALE, Colour.BLACK, 3.4));
+        assertThrows(Throwable.class, () -> new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)-1, Gender.MALE, Colour.BLACK, 3.4, "1124312515"));
         LOG.info("Finishing test for negative age");
     }
 
     @Test
     public void negativeWeight(){
         LOG.info("Iniciating test for negative weight");
-        assertThrows(Throwable.class, () -> new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)1, Gender.MALE, Colour.BLACK, -3.4));
+        assertThrows(Throwable.class, () -> new Pets("Manchas", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)1, Gender.MALE, Colour.BLACK, -3.4, "1124312515"));
         LOG.info("Finishing test for negative weight");
     }
 
     @Test
     public void blankInformation(){
         LOG.info("Iniciating test for blank information");
-        assertThrows(Throwable.class, () -> new Pets("", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)1, Gender.MALE, Colour.BLACK, -3.4));
+        assertThrows(Throwable.class, () -> new Pets("", Species.DOG, Breed.GOLDEN_RETRIEVER, (byte)1, Gender.MALE, Colour.BLACK, -3.4, ""));
         LOG.info("Finishing test for blank information");
     }
+
+
+
 
 }
